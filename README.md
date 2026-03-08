@@ -7,7 +7,7 @@ Sistema web de compliance de TI para a JRC Brasil — gera e gerencia relatorios
 
 ## Problema
 
-A JRC Brasil precisa enviar anualmente para a matriz no Japao uma serie de relatorios sobre seus ativos de TI: computadores, usuarios, licencas de software, acessos a servidores/ERP, antivirus, criptografia, celulares corporativos, entre outros. Hoje esse processo e manual e propenso a erros. Este sistema automatiza a geracao desses 19 relatorios a partir de um cadastro centralizado.
+A JRC Brasil precisa enviar anualmente para a matriz no Japao uma serie de relatorios sobre seus ativos de TI: computadores, usuarios, licencas de software, acessos a servidores/ERP, antivirus, criptografia, celulares corporativos, entre outros. Hoje esse processo e manual e propenso a erros. Este sistema automatiza a geracao desses relatorios a partir de um cadastro centralizado.
 
 ## Arquitetura
 
@@ -41,7 +41,7 @@ relatorio_japao/
 │   ├── config/                # Settings, URLs, WSGI
 │   ├── accounts/              # Auth JWT
 │   ├── core/                  # 14 modelos + Controllers/Services/Repositories
-│   └── reports/               # 19 relatorios + Controllers/Services/Repositories/Exporters
+│   └── reports/               # relatorios + Controllers/Services/Repositories/Exporters
 └── frontend/
     └── src/
         ├── api/               # Cliente Axios
@@ -89,7 +89,7 @@ O sistema gerencia 3 entidades principais e 11 dependentes:
 - **Machine** — computadores e notebooks (modelo, service tag, IP, MAC, criptografia)
 - **Software** — licencas (nome, chave, tipo, uso)
 
-A partir desses cadastros, sao gerados **19 relatorios de auditoria** cobrindo: contatos internos, computadores, usuarios de dominio, acesso a servidor/internet/ERP, licencas, criptografia, celulares, destruicao de dados, emails, pendrives, antivirus, atualizacoes de seguranca, WiFi e backup.
+A partir desses cadastros, sao gerados **relatorios de auditoria** cobrindo: contatos internos, computadores, usuarios de dominio, acesso a servidor/internet/ERP, licencas, criptografia, celulares, destruicao de dados, emails, pendrives, antivirus, atualizacoes de seguranca, WiFi e backup.
 
 ## Documentacao
 
