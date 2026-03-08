@@ -10,7 +10,7 @@ O projeto existe em **duas versoes independentes** que serao combinadas em um pr
 |---------|----------------------|---------------------------|
 | **Pasta** | `avaliacaoA2/` | `relatorio-jrc-main/` |
 | **Backend** | Express.js + TypeScript | Django 4.2.7 |
-| **Frontend** | React 18 (SPA) | Templates Django + Bootstrap |
+| **Frontend** | React 18 (SPA) | Templates Django |
 | **Banco de Dados** | PostgreSQL 13.5 (Prisma ORM) | SQLite3 |
 | **Modelos** | 14 tabelas completas | 1 modelo (Reports) |
 | **Relatorios** | 19-20 implementados | Nenhum real |
@@ -92,7 +92,7 @@ avaliacaoA2/
 **Frontend:**
 - React 18.2.0
 - react-router-dom 6.11.1
-- Bootstrap 5.2.3 + react-bootstrap 2.7.4
+- Tailwind CSS 3.4
 - react-scripts 5.0.1
 
 **DevOps:**
@@ -162,7 +162,7 @@ avaliacaoA2/
 - Docker Compose configurado para PostgreSQL
 - 19 queries SQL para relatorios
 - App React renderiza (Home, Cadastro, Update)
-- Estilizacao com Bootstrap
+- Estilizacao com Tailwind CSS
 
 **Problemas Criticos:**
 1. **Rotas desativadas** - Em `server.ts` a linha `app.use(routes)` esta comentada
@@ -215,8 +215,8 @@ relatorio-jrc-main/
 - **Django 4.2.7**
 - **Python 3.x**
 - **SQLite3** (banco padrao)
-- **crispy-forms + crispy-bootstrap5** (renderizacao de formularios)
-- **Bootstrap 5.3.2** (CDN)
+- **crispy-forms** (renderizacao de formularios)
+- **Tailwind CSS 3.4**
 - **Font Awesome** (icones)
 - **Django contrib.auth** (autenticacao)
 
@@ -261,7 +261,7 @@ relatorio-jrc-main/
 **Funcional:**
 - Autenticacao Django (login/logout)
 - Admin Panel com CRUD de Reports
-- Estrutura de templates com Bootstrap
+- Estrutura de templates
 - Navegacao entre paginas
 - CSS responsivo
 

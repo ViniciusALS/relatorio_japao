@@ -18,7 +18,7 @@ React SPA (:3000)  <-->  Django REST API (:8000)  <-->  PostgreSQL (:5432)
 | Camada | Tecnologia |
 |--------|-----------|
 | Backend | Django 4.2 + Django REST Framework |
-| Frontend | React 18 + React Router + Axios + Bootstrap 5 |
+| Frontend | React 18 + React Router + Axios + Tailwind CSS |
 | Autenticacao | JWT (djangorestframework-simplejwt) |
 | Banco de Dados | PostgreSQL |
 | Deploy | Docker Compose (3 containers) |
