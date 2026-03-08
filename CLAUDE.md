@@ -385,9 +385,32 @@ Request → urls.py (Route) → Controller → Service → Repository → Model/
 | Serializer | `serializers.py` | Validacao de input, formatacao de output |
 
 - **Backend:** Django 4.2 + DRF + PostgreSQL
-- **Frontend:** React 18 + React Router + Axios + Bootstrap 5
+- **Frontend:** React 18 + React Router + Axios + Tailwind CSS + shadcn/ui + React Query (ver [docs/FRONTEND.md](docs/FRONTEND.md))
 - **Auth:** JWT via djangorestframework-simplejwt
 - **Deploy:** Docker Compose (3 containers: db, backend, frontend)
+
+## Frontend Stack
+
+### Tailwind CSS
+
+- Usar classes utilitarias em vez de CSS customizado.
+- Seguir abordagem mobile-first; breakpoints por prefixo (`sm:`, `md:`, `lg:`).
+- Extrair componentes reutilizaveis quando um conjunto de classes se repetir em 3 ou mais lugares.
+
+### shadcn/ui
+
+- Componentes base para UI (`Button`, `Card`, `Dialog`, `Select`, `Toast`, etc.).
+- Customizacao feita exclusivamente via Tailwind CSS (sem CSS modulo adicional).
+- Acessibilidade built-in via Radix UI — nao reimplementar ARIA manualmente onde shadcn/ui ja fornece.
+
+### React Query
+
+- Usar `useQuery` para todas as operacoes de leitura (GET); nunca buscar dados diretamente em `useEffect` sem cache.
+- Usar `useMutation` para operacoes de escrita (POST, PUT, PATCH, DELETE).
+- Definir `staleTime` e `gcTime` (`cacheTime`) por dominio no `QueryClient` global.
+- Invalidar queries relacionadas apos mutacoes bem-sucedidas via `queryClient.invalidateQueries`.
+
+Para detalhes completos, consultar [docs/FRONTEND.md](docs/FRONTEND.md).
 
 ## Estrutura do Monorepo
 
@@ -417,7 +440,7 @@ relatorio_japao/
     ├── nginx.conf
     ├── public/
     └── src/
-        ├── api/         (Axios client)
+        ├── api/         (Axios client + React Query for data fetching/caching)
         ├── auth/        (AuthContext, ProtectedRoute)
         ├── components/  (Navbar, Card, DataTable, etc.)
         ├── pages/       (Login, Home, Cadastro, Relatorios, etc.)

@@ -10,7 +10,7 @@ Cliente (React SPA)  <-->  API REST (Django + DRF)  <-->  PostgreSQL
 ```
 
 - **Backend:** Django 4.2 + Django REST Framework + PostgreSQL
-- **Frontend:** React 18 + React Router + Axios + Bootstrap 5
+- **Frontend:** React 18 + React Router + Axios + Tailwind CSS + shadcn/ui + React Query
 - **Auth:** JWT via djangorestframework-simplejwt
 - **Deploy:** Docker Compose (3 containers)
 
@@ -109,6 +109,7 @@ relatorio_japao/
 **Objetivo:** Criar a estrutura base do monorepo com Django e React configurados.
 
 **Backend - Dependencias (requirements.txt):**
+
 ```
 Django==4.2.7
 djangorestframework==3.14.0
@@ -123,16 +124,31 @@ openpyxl==3.1.2
 ```
 
 **Frontend - Dependencias (package.json):**
+
 ```
-react: ^18.2.0
-react-dom: ^18.2.0
+react: ^18.3.0
+react-dom: ^18.3.0
 react-router-dom: ^6.11.1
 axios: ^1.6.0
-react-bootstrap: ^2.7.4
-bootstrap: ^5.2.3
+@tanstack/react-query: ^5.28.0
+@tanstack/react-query-devtools: ^5.28.0
+tailwindcss: ^3.4.13
+autoprefixer: ^10.4.20
+postcss: ^8.4.47
+@radix-ui/react-dialog: ^1.1.2
+@radix-ui/react-dropdown-menu: ^2.1.2
+@radix-ui/react-label: ^2.1.0
+@radix-ui/react-select: ^2.1.2
+@radix-ui/react-slot: ^1.1.0
+@radix-ui/react-toast: ^1.2.2
+class-variance-authority: ^0.7.0
+clsx: ^2.1.1
+tailwind-merge: ^2.5.3
+lucide-react: ^0.441.0
 ```
 
 **Docker Compose:**
+
 ```yaml
 services:
   db:
@@ -165,6 +181,7 @@ services:
 ```
 
 **Tarefas:**
+
 - [ ] Criar estrutura de pastas conforme diagrama acima
 - [ ] Inicializar projeto Django (`django-admin startproject config .`)
 - [ ] Criar apps: `accounts`, `core`, `reports`
@@ -203,6 +220,7 @@ services:
 > **Modelo base (abstrato):** Todos os modelos herdam campos `created_at`, `updated_at`, `deleted_at` (soft delete).
 
 **Tarefas:**
+
 - [ ] Criar classe abstrata `BaseModel` com campos de auditoria
 - [ ] Criar `BaseRepository` com metodos get_all, get_by_id, create, update, soft_delete
 - [ ] Implementar os 3 modelos principais (Collaborator, Machine, Software)
@@ -232,6 +250,7 @@ services:
 | POST | `/api/auth/logout/` | Invalida refresh token |
 
 **Configuracao DRF (settings.py):**
+
 ```python
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
@@ -250,12 +269,14 @@ SIMPLE_JWT = {
 ```
 
 **Frontend - AuthContext:**
+
 - Armazenar tokens no localStorage
 - Interceptor Axios para incluir token em todas as requisicoes
 - Redirect automatico para login quando token expira
 - Componente `ProtectedRoute` para rotas autenticadas
 
 **Tarefas:**
+
 - [ ] Instalar e configurar `djangorestframework-simplejwt`
 - [ ] Criar controllers e services de auth no app `accounts`
 - [ ] Criar serializer de registro de usuario
@@ -291,6 +312,7 @@ SIMPLE_JWT = {
 | `/api/pen-drives/` | GET | POST | GET /:id | PUT /:id | DELETE /:id |
 
 **Funcionalidades da API:**
+
 - Paginacao (PageNumberPagination, 20 itens por pagina)
 - Filtros (django-filter para busca por campos)
 - Ordenacao (OrderingFilter)
@@ -299,6 +321,7 @@ SIMPLE_JWT = {
 - Nested serializers (Collaborator retorna emails, cellphones, etc.)
 
 **Tarefas:**
+
 - [ ] Criar serializers para todos os 14 modelos
 - [ ] Criar Repositories para cada modelo (herdando de `BaseRepository`)
 - [ ] Criar Services para cada modelo (herdando de `BaseService`)
@@ -344,6 +367,7 @@ SIMPLE_JWT = {
 | `GET /api/reports/37/` | Usuarios Dominio | Collaborator.domain_user (detalhado) |
 
 **Funcionalidades:**
+
 - Filtro por ano (`?year=2024`)
 - Filtro por mes (`?month=6`)
 - Exportacao JSON (padrao)
@@ -351,6 +375,7 @@ SIMPLE_JWT = {
 - Exportacao Excel (via query param `?format=xlsx`)
 
 **Tarefas:**
+
 - [ ] Criar app `reports` com controllers, services e repositories para cada relatorio
 - [ ] Criar repositories com QuerySets otimizados (select_related, prefetch_related)
 - [ ] Criar serializers especificos para cada relatorio
@@ -380,6 +405,7 @@ SIMPLE_JWT = {
 | Editar | `/editar/:tipo/:id` | Formulario de edicao de registros |
 
 **Componentes reutilizaveis:**
+
 - `Navbar` - Navegacao com logo JRC, links, logout
 - `Card` - Card de relatorio com titulo, descricao, botao de download
 - `SearchBar` - Campo de busca com filtros
@@ -390,6 +416,7 @@ SIMPLE_JWT = {
 - `PDFButton` - Botao para download de PDF
 
 **Integracao API (Axios):**
+
 ```javascript
 // api/client.js
 const api = axios.create({
@@ -416,6 +443,7 @@ api.interceptors.response.use(
 ```
 
 **Tarefas:**
+
 - [ ] Configurar Axios com interceptors (auth + refresh)
 - [ ] Implementar pagina de Login
 - [ ] Implementar Dashboard (Home) com cards de relatorios
@@ -436,6 +464,7 @@ api.interceptors.response.use(
 **Objetivo:** Preparar o projeto para entrega final com testes, Docker e documentacao.
 
 **7.1 Docker (producao)**
+
 ```yaml
 # docker-compose.prod.yml
 services:
@@ -471,11 +500,13 @@ services:
 | E2E | Cypress ou Playwright | Fluxos completos |
 
 **7.3 Django Admin customizado**
+
 - Registrar todos os 14 modelos com list_display, search_fields, list_filter
 - Inline forms (Email, Cellphone dentro de Collaborator)
 - Actions em massa (ativar/desativar colaboradores)
 
 **7.4 Geracao de PDF**
+
 - Usar ReportLab para gerar PDFs dos 19 relatorios
 - Layout baseado nos templates HTML japoneses existentes (`Tabelas/`)
 - Cabecalho com logo JRC Brasil
@@ -483,6 +514,7 @@ services:
 - Rodape com data de geracao e numero de pagina
 
 **Tarefas:**
+
 - [ ] Criar Dockerfile para backend (Python + gunicorn)
 - [ ] Criar Dockerfile para frontend (Node build + nginx)
 - [ ] Criar docker-compose.prod.yml
@@ -530,35 +562,41 @@ services:
 ### Checklist de validacao por fase
 
 **Fase 1 - Setup:**
+
 - [ ] `docker-compose up` inicia os 3 servicos sem erro
 - [ ] `http://localhost:8000/admin/` mostra Django Admin
 - [ ] `http://localhost:3000` mostra app React
 
 **Fase 2 - Modelos:**
+
 - [ ] `python manage.py migrate` executa sem erro
 - [ ] Todos os 14 modelos aparecem no Admin
 - [ ] CRUD funciona no Admin para cada modelo
 - [ ] Relacionamentos FK funcionam corretamente
 
 **Fase 3 - Auth:**
+
 - [ ] POST `/api/auth/login/` retorna access + refresh token
 - [ ] GET `/api/auth/me/` retorna usuario com token valido
 - [ ] Rotas protegidas retornam 401 sem token
 - [ ] Refresh token renova access token
 
 **Fase 4 - API:**
+
 - [ ] Todos os 12 endpoints CRUD respondem corretamente
 - [ ] Paginacao funciona (20 itens por pagina)
 - [ ] Filtros e busca funcionam
 - [ ] Soft delete marca `deleted_at` sem remover registro
 
 **Fase 5 - Relatorios:**
+
 - [ ] Todos os 19 endpoints de relatorio retornam dados corretos
 - [ ] Filtro por ano funciona
 - [ ] Download PDF gera arquivo valido
 - [ ] Download Excel gera arquivo valido
 
 **Fase 6 - Frontend:**
+
 - [ ] Login funciona e redireciona para Dashboard
 - [ ] Cadastro cria registros via API
 - [ ] Lista de relatorios mostra todos os 19
@@ -566,6 +604,7 @@ services:
 - [ ] Download de PDF funciona pelo botao
 
 **Fase 7 - Finalizacao:**
+
 - [ ] `docker-compose -f docker-compose.prod.yml up` funciona
 - [ ] Testes passam: `pytest` (backend) e `npm test` (frontend)
 - [ ] README.md contem instrucoes claras de instalacao
