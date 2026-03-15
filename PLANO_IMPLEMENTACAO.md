@@ -1,10 +1,10 @@
-# Plano de Implementacao - Relatorio JRC Brasil
+# Plano de Implementação - Relatório JRC Brasil
 
 ## Arquitetura Proposta
 
 **Monorepo: Django REST Framework + React SPA**
 
-```
+```text
 Cliente (React SPA)  <-->  API REST (Django + DRF)  <-->  PostgreSQL
      :3000                      :8000                       :5432
 ```
@@ -16,15 +16,15 @@ Cliente (React SPA)  <-->  API REST (Django + DRF)  <-->  PostgreSQL
 
 ---
 
-## Estrutura de Diretorios do Produto Final
+## Estrutura de Diretórios do Produto Final
 
-```
+```text
 relatorio_japao/
-├── docs/                           (documentacao do projeto)
+├── docs/                           (documentação do projeto)
 │   ├── ANALISE.md
 │   └── PLANO_IMPLEMENTACAO.md
-├── docker-compose.yml              (orquestracao dos 3 servicos)
-├── .env                            (variaveis de ambiente)
+├── docker-compose.yml              (orquestração dos 3 serviços)
+├── .env                            (variáveis de ambiente)
 ├── .gitignore
 ├── README.md
 │
@@ -38,18 +38,18 @@ relatorio_japao/
 │   │   ├── urls.py
 │   │   ├── wsgi.py
 │   │   └── asgi.py
-│   ├── accounts/                   (app: autenticacao JWT)
+│   ├── accounts/                   (app: autenticação JWT)
 │   │   ├── models.py
 │   │   ├── serializers.py
 │   │   ├── controllers.py         (HTTP layer)
-│   │   ├── services.py            (logica de auth)
+│   │   ├── services.py            (lógica de auth)
 │   │   ├── urls.py
 │   │   └── tests.py
-│   ├── core/                       (app: modelos de negocio + CRUDs)
+│   ├── core/                       (app: modelos de negócio + CRUDs)
 │   │   ├── models.py              (14 modelos + BaseModel)
 │   │   ├── serializers.py
 │   │   ├── controllers.py         (HTTP layer - substitui views.py)
-│   │   ├── services.py            (logica de negocio)
+│   │   ├── services.py            (lógica de negócio)
 │   │   ├── repositories.py        (acesso a dados ORM)
 │   │   ├── urls.py
 │   │   ├── admin.py
@@ -58,13 +58,13 @@ relatorio_japao/
 │   │       ├── test_controllers.py
 │   │       ├── test_services.py
 │   │       └── test_repositories.py
-│   ├── reports/                    (app: 19 relatorios de compliance)
+│   ├── reports/                    (app: 19 relatórios de compliance)
 │   │   ├── serializers.py
 │   │   ├── controllers.py         (HTTP layer + format negotiation)
 │   │   ├── services.py            (gera dados, delega export)
-│   │   ├── repositories.py        (queries especificas por relatorio)
+│   │   ├── repositories.py        (queries específicas por relatório)
 │   │   ├── urls.py
-│   │   ├── exporters.py           (geracao PDF/Excel)
+│   │   ├── exporters.py           (geração PDF/Excel)
 │   │   └── tests/
 │   └── fixtures/                   (dados de teste)
 │       └── sample_data.json
@@ -76,17 +76,17 @@ relatorio_japao/
 │   ├── src/
 │   │   ├── index.js
 │   │   ├── App.js
-│   │   ├── api/                   (configuracao Axios)
+│   │   ├── api/                   (configuração Axios)
 │   │   │   └── client.js
-│   │   ├── auth/                  (contexto de autenticacao)
+│   │   ├── auth/                  (contexto de autenticação)
 │   │   │   ├── AuthContext.js
 │   │   │   └── ProtectedRoute.js
-│   │   ├── components/            (componentes reutilizaveis)
+│   │   ├── components/            (componentes reutilizáveis)
 │   │   │   ├── Navbar.js
 │   │   │   ├── Card.js
 │   │   │   ├── SearchBar.js
 │   │   │   └── DataTable.js
-│   │   ├── pages/                 (paginas da aplicacao)
+│   │   ├── pages/                 (páginas da aplicação)
 │   │   │   ├── Login.js
 │   │   │   ├── Home.js
 │   │   │   ├── Cadastro.js
@@ -94,23 +94,23 @@ relatorio_japao/
 │   │   │   └── ReportView.js
 │   │   └── routes/
 │   │       └── Routes.js
-│   └── nginx.conf                 (servir build em producao)
+│   └── nginx.conf                 (servir build em produção)
 │
-└── avaliacaoA2/                    (codigo original - referencia)
-└── relatorio-jrc-main/             (codigo original - referencia)
+└── avaliacaoA2/                    (código original - referência)
+└── relatorio-jrc-main/             (código original - referência)
 ```
 
 ---
 
-## Fases de Implementacao
+## Fases de Implementação
 
-### Fase 1: Setup do Projeto e Dependencias
+### Fase 1: Setup do Projeto e Dependências
 
 **Objetivo:** Criar a estrutura base do monorepo com Django e React configurados.
 
-**Backend - Dependencias (requirements.txt):**
+**Backend - Dependências (requirements.txt):**
 
-```
+```text
 Django==4.2.7
 djangorestframework==3.14.0
 djangorestframework-simplejwt==5.3.0
@@ -123,9 +123,9 @@ reportlab==4.0.8
 openpyxl==3.1.2
 ```
 
-**Frontend - Dependencias (package.json):**
+**Frontend - Dependências (package.json):**
 
-```
+```text
 react: ^18.3.0
 react-dom: ^18.3.0
 react-router-dom: ^6.11.1
@@ -188,9 +188,9 @@ services:
 - [ ] Inicializar React app (`npx create-react-app frontend`)
 - [ ] Configurar `settings.py` (database PostgreSQL, CORS, REST Framework)
 - [ ] Configurar Docker Compose
-- [ ] Testar `docker-compose up` (todos os servicos sobem)
+- [ ] Testar `docker-compose up` (todos os serviços sobem)
 
-**Entregavel:** Projeto base rodando com pagina inicial "Hello World" em ambos frontend e backend.
+**Entregável:** Projeto base rodando com página inicial "Hello World" em ambos frontend e backend.
 
 ---
 
@@ -200,7 +200,7 @@ services:
 
 **Tabela completa de modelos a implementar:**
 
-| # | Modelo | Campos | Tipo | FK/Relacao |
+| # | Modelo | Campos | Tipo | FK/Relação |
 |---|--------|--------|------|------------|
 | 1 | **Collaborator** | full_name (CharField unique), domain_user (CharField unique), status (Bool), perm_acess_internet (Bool), date_hired (DateTimeField), fired (Bool), date_fired (DateTimeField null), acess_wifi (Bool), admin_privilege (Bool), office (CharField) | Principal | - |
 | 2 | **Machine** | model (CharField), type (CharField), service_tag (CharField unique), operacional_system (CharField), ram_memory (CharField), disk_memory (CharField), ip (CharField unique), mac_address (CharField unique), administrator (CharField), cod_jdb (CharField), date_purchase (DateTimeField), quantity (IntField), crypto_disk (Bool), crypto_usb (Bool), crypto_memory_card (Bool), sold_out (Bool), date_sold_out (DateTimeField null) | Principal | - |
@@ -214,42 +214,42 @@ services:
 | 10 | **ServerErpAccess** | purchase (Bool), sale (Bool), production_control (Bool), service (Bool) | Dependente | FK -> Collaborator |
 | 11 | **DataDestroyed** | when_data_is_destroyed (DateTimeField), i_can_destroy_data (Bool) | Dependente | FK -> Machine |
 | 12 | **PenDrive** | checked_date (DateTimeField), have_virus (Bool) | Dependente | FK -> Collaborator |
-| 13 | **CollaboratorSoftware** | - | Juncao N:N | FK -> Collaborator, FK -> Software |
-| 14 | **CollaboratorMachine** | - | Juncao N:N | FK -> Collaborator, FK -> Machine |
+| 13 | **CollaboratorSoftware** | - | Junção N:N | FK -> Collaborator, FK -> Software |
+| 14 | **CollaboratorMachine** | - | Junção N:N | FK -> Collaborator, FK -> Machine |
 
 > **Modelo base (abstrato):** Todos os modelos herdam campos `created_at`, `updated_at`, `deleted_at` (soft delete).
 
 **Tarefas:**
 
 - [ ] Criar classe abstrata `BaseModel` com campos de auditoria
-- [ ] Criar `BaseRepository` com metodos get_all, get_by_id, create, update, soft_delete
+- [ ] Criar `BaseRepository` com métodos get_all, get_by_id, create, update, soft_delete
 - [ ] Implementar os 3 modelos principais (Collaborator, Machine, Software)
 - [ ] Implementar os 9 modelos dependentes (Email, Cellphone, Wifi, etc.)
-- [ ] Implementar as 2 tabelas de juncao (CollaboratorSoftware, CollaboratorMachine)
-- [ ] Criar e aplicar migracoes (`makemigrations` + `migrate`)
+- [ ] Implementar as 2 tabelas de junção (CollaboratorSoftware, CollaboratorMachine)
+- [ ] Criar e aplicar migrações (`makemigrations` + `migrate`)
 - [ ] Registrar todos os modelos no Django Admin
 - [ ] Criar fixtures com dados de teste (pelo menos 5 registros por modelo)
 - [ ] Validar relacionamentos no shell do Django
 
-**Entregavel:** Banco de dados populado, Admin Panel funcional com CRUD de todos os modelos.
+**Entregável:** Banco de dados populado, Admin Panel funcional com CRUD de todos os modelos.
 
 ---
 
-### Fase 3: Autenticacao JWT
+### Fase 3: Autenticação JWT
 
-**Objetivo:** Implementar autenticacao baseada em token JWT para a SPA React.
+**Objetivo:** Implementar autenticação baseada em token JWT para a SPA React.
 
 **Endpoints:**
 
-| Metodo | Rota | Descricao |
+| Método | Rota | Descrição |
 |--------|------|-----------|
 | POST | `/api/auth/login/` | Gera access + refresh token |
 | POST | `/api/auth/refresh/` | Renova access token |
-| POST | `/api/auth/register/` | Cria novo usuario |
-| GET | `/api/auth/me/` | Retorna dados do usuario logado |
+| POST | `/api/auth/register/` | Cria novo usuário |
+| GET | `/api/auth/me/` | Retorna dados do usuário logado |
 | POST | `/api/auth/logout/` | Invalida refresh token |
 
-**Configuracao DRF (settings.py):**
+**Configuração DRF (settings.py):**
 
 ```python
 REST_FRAMEWORK = {
@@ -271,22 +271,22 @@ SIMPLE_JWT = {
 **Frontend - AuthContext:**
 
 - Armazenar tokens no localStorage
-- Interceptor Axios para incluir token em todas as requisicoes
-- Redirect automatico para login quando token expira
+- Interceptor Axios para incluir token em todas as requisições
+- Redirect automático para login quando token expira
 - Componente `ProtectedRoute` para rotas autenticadas
 
 **Tarefas:**
 
 - [ ] Instalar e configurar `djangorestframework-simplejwt`
 - [ ] Criar controllers e services de auth no app `accounts`
-- [ ] Criar serializer de registro de usuario
+- [ ] Criar serializer de registro de usuário
 - [ ] Implementar `AuthContext` no React
 - [ ] Implementar interceptor Axios (adicionar Bearer token)
-- [ ] Criar pagina de Login no React
+- [ ] Criar página de Login no React
 - [ ] Criar componente `ProtectedRoute`
 - [ ] Testar fluxo completo: registro -> login -> acesso -> refresh -> logout
 
-**Entregavel:** Usuario pode registrar, logar, e acessar rotas protegidas.
+**Entregável:** Usuário pode registrar, logar, e acessar rotas protegidas.
 
 ---
 
@@ -313,11 +313,11 @@ SIMPLE_JWT = {
 
 **Funcionalidades da API:**
 
-- Paginacao (PageNumberPagination, 20 itens por pagina)
+- Paginação (PageNumberPagination, 20 itens por página)
 - Filtros (django-filter para busca por campos)
-- Ordenacao (OrderingFilter)
+- Ordenação (OrderingFilter)
 - Busca textual (SearchFilter)
-- Soft delete (marcar `deleted_at` ao inves de remover)
+- Soft delete (marcar `deleted_at` ao invés de remover)
 - Nested serializers (Collaborator retorna emails, cellphones, etc.)
 
 **Tarefas:**
@@ -333,89 +333,89 @@ SIMPLE_JWT = {
 - [ ] Testar todos os endpoints via DRF Browsable API
 - [ ] Documentar API (django-rest-framework gera docs automaticamente)
 
-**Entregavel:** API completa com CRUD de todos os modelos, testavel via browser.
+**Entregável:** API completa com CRUD de todos os modelos, testável via browser.
 
 ---
 
-### Fase 5: 19 Relatorios de Compliance
+### Fase 5: 19 Relatórios de Compliance
 
-**Objetivo:** Implementar os 19 relatorios como endpoints REST que retornam dados formatados.
+**Objetivo:** Implementar os 19 relatórios como endpoints REST que retornam dados formatados.
 
 **Endpoints:**
 
-| Rota | Relatorio | Query Principal |
+| Rota | Relatório | Query Principal |
 |------|-----------|----------------|
 | `GET /api/reports/08/` | Lista de Contatos | Collaborator + Email + Cellphone |
 | `GET /api/reports/09/` | Lista de Computadores | Machine (todos os campos) |
-| `GET /api/reports/13/` | Usuarios de Dominio | Collaborator.domain_user + status |
+| `GET /api/reports/13/` | Usuários de Domínio | Collaborator.domain_user + status |
 | `GET /api/reports/15/` | Acesso Servidor Arquivos | ServerAccess + Collaborator |
-| `GET /api/reports/17/` | Permissao Internet | Collaborator.perm_acess_internet |
-| `GET /api/reports/19/` | Licencas Software | Software (licenca, quantidade, uso) |
+| `GET /api/reports/17/` | Permissão Internet | Collaborator.perm_acess_internet |
+| `GET /api/reports/19/` | Licenças Software | Software (licença, quantidade, uso) |
 | `GET /api/reports/20/` | Notebooks Criptografia | Machine (crypto_disk/usb/memory_card) + notebooks |
 | `GET /api/reports/21/` | Celulares Ativados | Cellphone + Collaborator (status=True) |
-| `GET /api/reports/22/` | Destruicao de Dados | DataDestroyed + Machine |
+| `GET /api/reports/22/` | Destruição de Dados | DataDestroyed + Machine |
 | `GET /api/reports/23/` | Acesso ERP | ServerErpAccess + Collaborator |
 | `GET /api/reports/24/` | Lista de E-mails | Email + Collaborator |
-| `GET /api/reports/25/` | Virus em Pendrives | PenDrive + Collaborator |
-| `GET /api/reports/26/` | Padrao Antivirus | AntiVirus (updated mensais) + Machine |
+| `GET /api/reports/25/` | Vírus em Pendrives | PenDrive + Collaborator |
+| `GET /api/reports/26/` | Padrão Antivirus | AntiVirus (updated mensais) + Machine |
 | `GET /api/reports/28/` | Uso de Software | CollaboratorSoftware + Collaborator + Software |
-| `GET /api/reports/29/` | Atualizacoes Seguranca | AntiVirus (check mensais) + Machine |
-| `GET /api/reports/31/` | Verificacao Antivirus | AntiVirus + Machine (scan mensal) |
+| `GET /api/reports/29/` | Atualizações Segurança | AntiVirus (check mensais) + Machine |
+| `GET /api/reports/31/` | Verificação Antivirus | AntiVirus + Machine (scan mensal) |
 | `GET /api/reports/33/` | Acesso WiFi | Wifi + Collaborator |
 | `GET /api/reports/34/` | Troca Senha WiFi | Wifi (protection, meses) |
 | `GET /api/reports/35/` | Backup Servidores | Server + Machine (backup_date) |
-| `GET /api/reports/37/` | Usuarios Dominio | Collaborator.domain_user (detalhado) |
+| `GET /api/reports/37/` | Usuários Domínio | Collaborator.domain_user (detalhado) |
 
 **Funcionalidades:**
 
 - Filtro por ano (`?year=2024`)
-- Filtro por mes (`?month=6`)
-- Exportacao JSON (padrao)
-- Exportacao PDF (via query param `?format=pdf`)
-- Exportacao Excel (via query param `?format=xlsx`)
+- Filtro por mês (`?month=6`)
+- Exportação JSON (padrão)
+- Exportação PDF (via query param `?format=pdf`)
+- Exportação Excel (via query param `?format=xlsx`)
 
 **Tarefas:**
 
-- [ ] Criar app `reports` com controllers, services e repositories para cada relatorio
+- [ ] Criar app `reports` com controllers, services e repositories para cada relatório
 - [ ] Criar repositories com QuerySets otimizados (select_related, prefetch_related)
-- [ ] Criar serializers especificos para cada relatorio
-- [ ] Implementar filtros por ano/mes nos repositories
-- [ ] Criar `exporters.py` com template base para exportacao PDF (usando ReportLab)
+- [ ] Criar serializers específicos para cada relatório
+- [ ] Implementar filtros por ano/mês nos repositories
+- [ ] Criar `exporters.py` com template base para exportação PDF (usando ReportLab)
 - [ ] Adaptar templates HTML japoneses da pasta `Tabelas/` para PDF
-- [ ] Implementar exportacao Excel em `exporters.py` (openpyxl)
-- [ ] Testar cada relatorio com dados de teste
+- [ ] Implementar exportação Excel em `exporters.py` (openpyxl)
+- [ ] Testar cada relatório com dados de teste
 
-**Entregavel:** 19 endpoints de relatorios funcionais com exportacao JSON/PDF/Excel.
+**Entregável:** 19 endpoints de relatórios funcionais com exportação JSON/PDF/Excel.
 
 ---
 
-### Fase 6: Integracao Frontend React
+### Fase 6: Integração Frontend React
 
 **Objetivo:** Conectar o frontend React a API Django, implementando todas as telas.
 
-**Paginas a implementar:**
+**Páginas a implementar:**
 
-| Pagina | Rota React | Funcionalidade |
+| Página | Rota React | Funcionalidade |
 |--------|-----------|----------------|
-| Login | `/login` | Formulario de login -> JWT |
-| Home/Dashboard | `/` | Cards com resumo e links para relatorios |
-| Cadastro | `/cadastro` | Formularios para Collaborator, Machine, Software |
-| Relatorios | `/relatorios` | Lista dos 19 relatorios com busca |
-| Visualizar Relatorio | `/relatorios/:id` | Tabela com dados do relatorio selecionado |
-| Editar | `/editar/:tipo/:id` | Formulario de edicao de registros |
+| Login | `/login` | Formulário de login -> JWT |
+| Home/Dashboard | `/` | Cards com resumo e links para relatórios |
+| Cadastro | `/cadastro` | Formulários para Collaborator, Machine, Software |
+| Relatórios | `/relatórios` | Lista dos 19 relatórios com busca |
+| Visualizar Relatório | `/relatórios/:id` | Tabela com dados do relatório selecionado |
+| Editar | `/editar/:tipo/:id` | Formulário de edição de registros |
 
-**Componentes reutilizaveis:**
+**Componentes reutilizáveis:**
 
-- `Navbar` - Navegacao com logo JRC, links, logout
-- `Card` - Card de relatorio com titulo, descricao, botao de download
+- `Navbar` - Navegação com logo JRC, links, logout
+- `Card` - Card de relatório com título, descrição, botão de download
 - `SearchBar` - Campo de busca com filtros
-- `DataTable` - Tabela generica com paginacao e ordenacao
-- `FormField` - Campo de formulario reutilizavel
+- `DataTable` - Tabela genérica com paginação e ordenação
+- `FormField` - Campo de formulário reutilizável
 - `Alert` - Mensagens de sucesso/erro
 - `Loading` - Spinner de carregamento
-- `PDFButton` - Botao para download de PDF
+- `PDFButton` - Botão para download de PDF
 
-**Integracao API (Axios):**
+**Integração API (Axios):**
 
 ```javascript
 // api/client.js
@@ -430,7 +430,7 @@ api.interceptors.request.use((config) => {
   return config;
 });
 
-// Interceptor para refresh automatico
+// Interceptor para refresh automático
 api.interceptors.response.use(
   (response) => response,
   async (error) => {
@@ -445,25 +445,25 @@ api.interceptors.response.use(
 **Tarefas:**
 
 - [ ] Configurar Axios com interceptors (auth + refresh)
-- [ ] Implementar pagina de Login
-- [ ] Implementar Dashboard (Home) com cards de relatorios
-- [ ] Implementar formulario de Cadastro (Collaborator, Machine, Software)
-- [ ] Implementar lista de Relatorios com busca
-- [ ] Implementar visualizacao de relatorio individual (tabela)
-- [ ] Implementar formulario de Edicao
-- [ ] Implementar botao de download PDF/Excel
+- [ ] Implementar página de Login
+- [ ] Implementar Dashboard (Home) com cards de relatórios
+- [ ] Implementar formulário de Cadastro (Collaborator, Machine, Software)
+- [ ] Implementar lista de Relatórios com busca
+- [ ] Implementar visualização de relatório individual (tabela)
+- [ ] Implementar formulário de Edição
+- [ ] Implementar botão de download PDF/Excel
 - [ ] Implementar feedback visual (loading, erros, sucesso)
 - [ ] Testar fluxo completo end-to-end
 
-**Entregavel:** SPA React funcional com todas as telas conectadas a API.
+**Entregável:** SPA React funcional com todas as telas conectadas a API.
 
 ---
 
-### Fase 7: Finalizacao (Docker, Testes, PDF, Admin)
+### Fase 7: Finalização (Docker, Testes, PDF, Admin)
 
-**Objetivo:** Preparar o projeto para entrega final com testes, Docker e documentacao.
+**Objetivo:** Preparar o projeto para entrega final com testes, Docker e documentação.
 
-**7.1 Docker (producao)**
+**7.1 Docker (produção)**
 
 ```yaml
 # docker-compose.prod.yml
@@ -494,9 +494,9 @@ services:
 
 | Tipo | Ferramenta | Escopo |
 |------|-----------|--------|
-| Unitarios (backend) | pytest + pytest-django | Repositories, services, controllers |
-| Integracao (backend) | DRF APITestCase | Endpoints, auth, permissoes |
-| Unitarios (frontend) | Jest + React Testing Library | Componentes, hooks |
+| Unitários (backend) | pytest + pytest-django | Repositories, services, controllers |
+| Integração (backend) | DRF APITestCase | Endpoints, auth, permissões |
+| Unitários (frontend) | Jest + React Testing Library | Componentes, hooks |
 | E2E | Cypress ou Playwright | Fluxos completos |
 
 **7.3 Django Admin customizado**
@@ -505,65 +505,65 @@ services:
 - Inline forms (Email, Cellphone dentro de Collaborator)
 - Actions em massa (ativar/desativar colaboradores)
 
-**7.4 Geracao de PDF**
+**7.4 Geração de PDF**
 
-- Usar ReportLab para gerar PDFs dos 19 relatorios
+- Usar ReportLab para gerar PDFs dos 19 relatórios
 - Layout baseado nos templates HTML japoneses existentes (`Tabelas/`)
-- Cabecalho com logo JRC Brasil
+- Cabeçalho com logo JRC Brasil
 - Tabelas formatadas com dados do banco
-- Rodape com data de geracao e numero de pagina
+- Rodapé com data de geração e número de página
 
 **Tarefas:**
 
 - [ ] Criar Dockerfile para backend (Python + gunicorn)
 - [ ] Criar Dockerfile para frontend (Node build + nginx)
 - [ ] Criar docker-compose.prod.yml
-- [ ] Escrever testes unitarios por camada (repositories, services)
-- [ ] Escrever testes de integracao para controllers
+- [ ] Escrever testes unitários por camada (repositories, services)
+- [ ] Escrever testes de integração para controllers
 - [ ] Escrever testes para componentes React
 - [ ] Customizar Django Admin para todos os modelos
-- [ ] Implementar geracao de PDF com ReportLab
-- [ ] Criar README.md final com instrucoes de instalacao e uso
-- [ ] Testar deploy com `docker-compose up` em maquina limpa
+- [ ] Implementar geração de PDF com ReportLab
+- [ ] Criar README.md final com instruções de instalação e uso
+- [ ] Testar deploy com `docker-compose up` em máquina limpa
 
-**Entregavel:** Projeto completo, testado, dockerizado e documentado.
+**Entregável:** Projeto completo, testado, dockerizado e documentado.
 
 ---
 
-## Arquivos de Referencia Importantes
+## Arquivos de Referência Importantes
 
 ### Do projeto Node.js (avaliacaoA2)
 
-| Arquivo | O que contem | Como usar |
+| Arquivo | O que contém | Como usar |
 |---------|-------------|-----------|
-| `Back-end/prisma/schema.prisma` | Definicao dos 14 modelos | Base para criar `core/models.py` |
-| `Back-end/src/controller/views/ViewReports.ts` | 19 queries SQL dos relatorios | Base para QuerySets no app `reports` |
-| `Back-end/src/controller/inserts/` | Logica de criacao de registros | Referencia para serializers |
-| `Back-end/src/routes/` | Estrutura de rotas | Referencia para `urls.py` |
+| `Back-end/prisma/schema.prisma` | Definição dos 14 modelos | Base para criar `core/models.py` |
+| `Back-end/src/controller/views/ViewReports.ts` | 19 queries SQL dos relatórios | Base para QuerySets no app `reports` |
+| `Back-end/src/controller/inserts/` | Lógica de criação de registros | Referência para serializers |
+| `Back-end/src/routes/` | Estrutura de rotas | Referência para `urls.py` |
 | `Back-end/DevOps/postgres/docker-compose.yml` | Config Docker PostgreSQL | Base para docker-compose final |
 | `Front-end/relatoriojapao/src/Components/` | Componentes React | Reaproveitar/adaptar |
-| `Front-end/relatoriojapao/src/Pages/` | Paginas React | Reaproveitar/adaptar |
-| `Tabelas/*.html` | Templates HTML dos relatorios japoneses | Base para layout PDF |
+| `Front-end/relatoriojapao/src/Pages/` | Páginas React | Reaproveitar/adaptar |
+| `Tabelas/*.html` | Templates HTML dos relatórios japoneses | Base para layout PDF |
 
 ### Do projeto Django (relatorio-jrc-main)
 
-| Arquivo | O que contem | Como usar |
+| Arquivo | O que contém | Como usar |
 |---------|-------------|-----------|
-| `controle/settings.py` | Configuracao Django | Referencia para `config/settings.py` |
-| `accounts/views.py` | Logica de auth | Referencia para auth JWT |
-| `accounts/forms.py` | Forms de usuario | Referencia para serializers |
+| `controle/settings.py` | Configuração Django | Referência para `config/settings.py` |
+| `accounts/views.py` | Lógica de auth | Referência para auth JWT |
+| `accounts/forms.py` | Forms de usuário | Referência para serializers |
 | `reports/models.py` | Modelo Reports | Exemplo de modelo Django |
-| `reports/templates/` | Templates HTML | Referencia de UX/layout |
+| `reports/templates/` | Templates HTML | Referência de UX/layout |
 
 ---
 
-## Verificacao e Testes
+## Verificação e Testes
 
-### Checklist de validacao por fase
+### Checklist de validação por fase
 
 **Fase 1 - Setup:**
 
-- [ ] `docker-compose up` inicia os 3 servicos sem erro
+- [ ] `docker-compose up` inicia os 3 serviços sem erro
 - [ ] `http://localhost:8000/admin/` mostra Django Admin
 - [ ] `http://localhost:3000` mostra app React
 
@@ -577,50 +577,50 @@ services:
 **Fase 3 - Auth:**
 
 - [ ] POST `/api/auth/login/` retorna access + refresh token
-- [ ] GET `/api/auth/me/` retorna usuario com token valido
+- [ ] GET `/api/auth/me/` retorna usuário com token válido
 - [ ] Rotas protegidas retornam 401 sem token
 - [ ] Refresh token renova access token
 
 **Fase 4 - API:**
 
 - [ ] Todos os 12 endpoints CRUD respondem corretamente
-- [ ] Paginacao funciona (20 itens por pagina)
+- [ ] Paginação funciona (20 itens por página)
 - [ ] Filtros e busca funcionam
 - [ ] Soft delete marca `deleted_at` sem remover registro
 
-**Fase 5 - Relatorios:**
+**Fase 5 - Relatórios:**
 
-- [ ] Todos os 19 endpoints de relatorio retornam dados corretos
+- [ ] Todos os 19 endpoints de relatório retornam dados corretos
 - [ ] Filtro por ano funciona
-- [ ] Download PDF gera arquivo valido
-- [ ] Download Excel gera arquivo valido
+- [ ] Download PDF gera arquivo válido
+- [ ] Download Excel gera arquivo válido
 
 **Fase 6 - Frontend:**
 
 - [ ] Login funciona e redireciona para Dashboard
 - [ ] Cadastro cria registros via API
-- [ ] Lista de relatorios mostra todos os 19
-- [ ] Visualizacao de relatorio mostra tabela com dados
-- [ ] Download de PDF funciona pelo botao
+- [ ] Lista de relatórios mostra todos os 19
+- [ ] Visualização de relatório mostra tabela com dados
+- [ ] Download de PDF funciona pelo botão
 
-**Fase 7 - Finalizacao:**
+**Fase 7 - Finalização:**
 
 - [ ] `docker-compose -f docker-compose.prod.yml up` funciona
 - [ ] Testes passam: `pytest` (backend) e `npm test` (frontend)
-- [ ] README.md contem instrucoes claras de instalacao
+- [ ] README.md contém instruções claras de instalação
 
 ---
 
 ## Cronograma Sugerido (por fase)
 
-| Fase | Descricao | Dependencia |
+| Fase | Descrição | Dependência |
 |------|-----------|-------------|
 | 1 | Setup do Projeto | - |
 | 2 | Modelos Django | Fase 1 |
-| 3 | Autenticacao JWT | Fase 1 |
+| 3 | Autenticação JWT | Fase 1 |
 | 4 | API REST CRUD | Fase 2 |
-| 5 | 19 Relatorios | Fase 4 |
+| 5 | 19 Relatórios | Fase 4 |
 | 6 | Frontend React | Fase 3 + Fase 4 |
-| 7 | Finalizacao | Fase 5 + Fase 6 |
+| 7 | Finalização | Fase 5 + Fase 6 |
 
 > **Nota:** Fases 2 e 3 podem ser executadas em paralelo. Fase 6 depende de Fases 3 e 4.

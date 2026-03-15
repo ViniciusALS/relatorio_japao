@@ -1,0 +1,27 @@
+{% extends 'base_acc.html' %}
+{% load crispy_forms_tags %}
+
+
+{% block title %}Login{% endblock %}
+
+{% block content %}
+
+<div class="container">
+    <div class="row">
+        <div class="card">
+            <div class="card-body">
+                <h1 class="card-title text-center">Login</h1>
+                <form method="POST" class="fields">
+                    {% csrf_token %}
+                    <input type="hidden" name="next" value="{{ next }}">
+                    {{ form|crispy }}
+                    <input type="submit" value="Login" class="btn" >
+                </form>
+                <div class="links">
+                    <a href="/accounts/forgotten_password">Esqueci a senha</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

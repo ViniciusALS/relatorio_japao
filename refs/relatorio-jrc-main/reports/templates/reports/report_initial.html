@@ -1,0 +1,47 @@
+{%  extends 'base.html' %}
+{% load static %}
+{% block title %} JRC Brasil Relatorios {% endblock %}
+{% block content %}
+<div class="background-discovery" style=" background-image: url('{% static "img/barco_jrc.svg" %}');">
+    <div class="discovery">
+        <input type="text" id="search" class="field" name="search_field"><button class="btn" ><i class="fa fa-search btn" aria-hidden="true"></i>Pesquisar</button>
+    </div>
+</div>
+    <div class="report">
+        <div class="report-item">
+            <img class="report-img" src="{% static 'img/imagem_arquivo.svg' %}" alt="">
+            <div class="report-group">
+                <h2 class="text-center report-title">Relatorio XX</h2>
+                <button class="btn btn-item">Baixar PDF</button>
+            </div>
+        </div>
+        <div class="report-item">
+            <img class="report-img" src="{% static 'img/imagem_arquivo.svg' %}" alt="">
+            <div class="report-group">
+                <h2 class="text-center report-title">Relatorio XX</h2>
+                <button class="btn btn-item">Baixar PDF</button>
+            </div>
+        </div>
+        <div class="report-item">
+            <img class="report-img" src="{% static 'img/imagem_arquivo.svg' %}" alt="">
+            <div class="report-group">
+                <h2 class="text-center report-title">Relatorio XX</h2>
+                <button class="btn btn-item">Baixar PDF</button>
+            </div>
+        </div>
+        <div class="report-item">
+            <img class="report-img" src="{% static 'img/imagem_arquivo.svg' %}" alt="">
+            <div class="report-group">
+                <h2 class="text-center report-title">Relatorio XX</h2>
+                <button class="btn btn-item">Baixar PDF</button>
+            </div>
+        </div> 
+        <div class="report-item">
+            <img class="report-img" src="{% static 'img/imagem_arquivo.svg' %}" alt="">
+            <div class="report-group">
+                <h2 class="text-center report-title">Relatorio XX</h2>
+                <button class="btn btn-item">Baixar PDF</button>
+            </div>
+        </div>
+    </div>
+{% endblock %}

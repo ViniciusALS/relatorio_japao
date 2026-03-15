@@ -1,0 +1,127 @@
+body{
+    background-color: #D9D9D9;
+}
+
+.navbar{
+    background-color: #ED2127;
+}
+
+.navbar-nav{
+    margin-right: 20%;
+}
+
+.nav-item{
+    margin: 0px 3vh;
+}
+
+.container-fluid{
+    margin: 1.0vh 0px;
+}
+
+.navbar-collapse{
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.nav-item{
+    font-size: 18px;
+}
+
+.nav-link{
+    color: white;
+}
+
+.background-discovery{
+    height: 100%;
+    background-repeat: no-repeat;
+    background-size: cover;
+    overflow: hidden
+}
+
+.discovery{
+    display: flex;
+    justify-content: center;
+    margin: 5% 10%;
+    border: 1px black solid;
+    border-radius: 6px;
+}
+
+#search{
+    width: 100%;
+    border-radius: 5px 0px 0px 5px;
+    border: none;
+    outline: none;
+    text-decoration: none;
+}
+
+.btn{
+    display: flex;
+    justify-content: center;
+    border: none;
+    background-color: #ED2127;
+    border-radius: 0px 5px 5px 0px;
+    font-size:24px;
+    color: white;
+}
+
+.btn-item{
+    border: none;
+    border-radius: 0px 5px 5px 0px;
+    background-color: #ED2127;
+    border-radius: 5px;
+    font-size:24px;
+    color: white;
+    margin-left: 2vh;
+    margin-top: 1vh;
+}
+
+.btn:hover,
+.btn-item:hover{
+    color: white !important;
+    background-color: #fd333a !important;
+}
+
+.btn:active,.btn-item:active{
+    color: black !important;
+}
+
+.report{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 2%;
+}
+
+.report-group{
+    width: 45%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-right: 20vh;
+}
+
+.report-item{
+    position: relative;
+    width: 70%;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    margin: 1% 0px;
+    border-radius: 5px;
+    background-color: white;
+}
+
+.report-title{
+    margin: 0px 5vh;
+}
+
+.report-simbol{
+    display: flex;
+    align-items: center;
+}
+
+.report-img{
+    height: 70%;
+    /* margin-left: 30px; */
+}

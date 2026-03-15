@@ -1,0 +1,92 @@
+html, body {
+    height: 100%;
+    background-repeat: no-repeat;
+    background-size: cover;
+    overflow: hidden
+}
+
+.container{
+    display: flex;
+    justify-content: center;
+    margin-top: 22vh;
+}
+
+.row{
+    width: 50vh;
+}
+
+.row>*{
+    padding: 0px;
+}
+
+.card{
+    background-color: #e5e5e5;
+}
+
+.card-title{
+    background-color: #ED2127;
+    border-radius: 5px 5px 0px 0px;
+    color: white;
+    width: 100%;
+    padding: 1.5vh 0px;
+}
+
+.card-body{
+    padding: 0px;
+}
+
+form.fields{
+    display: flex;
+    flex-direction: column;
+}
+
+.fields{
+    padding: 0px 5vh;
+}
+
+label{
+    font-weight: 600;
+    color: #474747;
+}
+
+/* Botão */
+
+.btn{
+    background-color: #ED2127 !important;
+    color: white;
+    font-size: 18px;
+    --bs-btn-border-width: 0px;
+}
+
+.btn:hover{
+    border: 0;
+    background-color: #fd333a !important;
+    color: white;
+}
+.btn:active{
+    border: 0;
+    background-color: #fd333a !important;
+    color: black;
+}
+
+
+label,#user , #password, .btn{
+    margin-top: 1.5vh;
+}
+
+.links{
+    display: flex;
+    margin-top: 1vh;
+    justify-content: space-around;
+    font-weight: 500;
+    margin-bottom: 3vh;
+}
+
+a{
+    color: #474747;
+}
+
+.form-control:focus {
+    border-color: #f2f2f2;
+    box-shadow: 0 0 0 0.2rem #f2f2f2;
+}

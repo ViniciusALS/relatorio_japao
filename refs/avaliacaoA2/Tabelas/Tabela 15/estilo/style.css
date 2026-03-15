@@ -1,0 +1,66 @@
+@charset "UTF-8";
+
+header {
+    width: 100%;
+    height: 100px;
+    background: url("../logo/JRCBrasil-logo2.png") no-repeat 0px 35px;
+}
+
+body {
+    font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse ;
+    margin: auto;
+}
+
+thead {
+    background-color: black;
+    color: white;
+    text-align: center;
+}
+
+th, td {
+    border: 2px solid black;
+    margin: auto;
+}
+
+caption {
+    font-weight: bold;
+    padding: 10px;
+}
+
+
+.preencher {
+    text-align: center;
+    padding-top: 1px;
+    padding-right: 50px;
+    padding-bottom: 0px;
+    padding-left: 50px;
+}
+
+.verde {
+    background: greenyellow;
+    text-align: center;
+    padding-top: 1px;
+    padding-right: 50px;
+    padding-bottom: 0px;
+    padding-left: 50px;
+}
+
+.vermelho {
+    background: rgb(245, 115, 115);
+    text-align: center;
+    padding-top: 1px;
+    padding-right: 50px;
+    padding-bottom: 0px;
+    padding-left: 50px;
+}
+
+
+td.num {
+    text-align: right;
+    padding-left: 30px;
+}

@@ -1,0 +1,46 @@
+@charset "UTF-8";
+
+header {
+    width: 100%;
+    height: 100px;
+    background: url("../logo/JRCBrasil-logo2.png") no-repeat 0px 35px;
+}
+
+body {
+    font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+}
+
+table {
+    width: 90%;
+    border-collapse: collapse ;
+    margin: auto;
+}
+
+thead {
+    background-color: black;
+    color: white;
+    text-align: left;
+}
+
+th, td {
+    border: 2px solid black;
+    margin: auto;
+}
+
+
+caption {
+    font-weight: bold;
+    padding: 10px;
+}
+
+.vazio {
+    background-color: white;
+    border: 0px;
+    padding-right: 15px;
+    text-align: right;
+}
+
+
+td.num {
+    text-align: right;
+}
