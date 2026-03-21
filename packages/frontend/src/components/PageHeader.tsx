@@ -1,3 +1,15 @@
+/**
+ * Cabeçalho padrão de página com título, subtítulo e ações.
+ *
+ * Renderiza título principal (h1), subtítulo opcional e slot para
+ * botões de ação alinhados à direita.
+ *
+ * @param {Object} props
+ * @param {string} props.title - Título principal da página.
+ * @param {string} [props.subtitle] - Texto descritivo abaixo do título.
+ * @param {ReactNode} [props.children] - Botões ou ações à direita do cabeçalho.
+ * @returns {JSX.Element} Cabeçalho renderizado.
+ */
 import { ReactNode } from "react";
 
 interface PageHeaderProps {

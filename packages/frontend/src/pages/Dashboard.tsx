@@ -6,6 +6,7 @@
  * e alertas de segurança (máquinas sem criptografia).
  */
 import { Users, Monitor, Package, FileText, AlertTriangle, CheckCircle } from "lucide-react";
+import { cn } from "@/lib/utils";
 import AppLayout from "@/components/AppLayout";
 import PageHeader from "@/components/PageHeader";
 import { Skeleton } from "@/components/ui/skeleton";
@@ -60,7 +61,7 @@ const Dashboard = () => {
       <PageHeader title="Dashboard" subtitle="Visão geral do compliance de TI — JRC Brasil" />
 
       {/* KPI Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 mb-8">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
         {isLoading
           ? Array.from({ length: 4 }).map((_, i) => (
               <Skeleton key={i} className="h-28 rounded-xl" />
@@ -68,8 +69,8 @@ const Dashboard = () => {
           : kpis.map(({ label, value, total, icon: Icon, color, bgColor }) => (
               <div key={label} className="bg-card rounded-xl border border-border p-5">
                 <div className="flex items-center justify-between mb-3">
-                  <div className={`w-10 h-10 rounded-lg ${bgColor} flex items-center justify-center`}>
-                    <Icon className={`w-5 h-5 ${color}`} />
+                  <div className={cn("w-10 h-10 rounded-lg flex items-center justify-center", bgColor)}>
+                    <Icon className={cn("w-5 h-5", color)} />
                   </div>
                   {total !== undefined && (
                     <span className="text-xs text-muted-foreground">de {total}</span>
@@ -120,7 +121,7 @@ const Dashboard = () => {
                       <p className="text-sm font-medium text-card-foreground">{r.name}</p>
                       <p className="text-xs text-muted-foreground">{r.nameJp}</p>
                     </div>
-                    <span className={`text-xs font-medium ${r.status === "sent" ? "text-status-active" : "text-accent"}`}>
+                    <span className={cn("text-xs font-medium", r.status === "sent" ? "text-status-active" : "text-accent")}>
                       {r.status === "sent" ? "Enviado" : "Gerado"}
                     </span>
                   </div>

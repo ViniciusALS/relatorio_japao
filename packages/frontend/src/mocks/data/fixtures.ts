@@ -1,7 +1,7 @@
 /**
  * Dados mock para handlers MSW.
  *
- * Baseados nos dados de exemplo do Lovable (mockData.ts),
+ * Baseados nos dados de exemplo originais,
  * convertidos para o formato snake_case da API Django REST.
  * Usados apenas em ambiente de desenvolvimento.
  */

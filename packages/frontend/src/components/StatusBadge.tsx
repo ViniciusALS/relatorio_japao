@@ -1,3 +1,15 @@
+/**
+ * Badge de status com cor semântica para entidades do sistema.
+ *
+ * Exibe label traduzido em PT-BR com cores CSS variables
+ * mapeadas ao status: ativo, inativo, pendente, gerado ou enviado.
+ *
+ * @param {Object} props
+ * @param {"active"|"inactive"|"pending"|"generated"|"sent"} props.status - Status da entidade.
+ * @returns {JSX.Element} Badge renderizado com cor e label apropriados.
+ */
+import { cn } from "@/lib/utils";
+
 interface StatusBadgeProps {
   status: "active" | "inactive" | "pending" | "generated" | "sent";
 }
@@ -13,7 +25,7 @@ const config: Record<string, { label: string; className: string }> = {
 const StatusBadge = ({ status }: StatusBadgeProps) => {
   const { label, className } = config[status];
   return (
-    <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${className}`}>
+    <span className={cn("inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium", className)}>
       {label}
     </span>
   );

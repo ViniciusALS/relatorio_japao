@@ -104,6 +104,7 @@ A partir desses cadastros, são gerados **relatórios de auditoria** cobrindo: c
 | [docs/BACKEND.md](docs/BACKEND.md) | Referência completa do backend Django/DRF |
 | [docs/FRONTEND.md](docs/FRONTEND.md) | Referência completa do frontend React |
 | [docs/INFRA.md](docs/INFRA.md) | Docker, deploy e troubleshooting |
+| [ROADMAP.md](ROADMAP.md) | Estado atual, fases do projeto e como usar |
 
 ## Contexto
 

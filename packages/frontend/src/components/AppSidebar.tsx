@@ -3,13 +3,20 @@
  *
  * Exibe logo JRC, links de navegação com indicador de rota ativa,
  * nome do usuário logado e botão de logout via AuthContext.
+ * Aceita callback onNavigate para fechar drawer mobile após clique.
+ *
+ * @param {Object} [props]
+ * @param {Function} [props.onNavigate] - Callback disparado após clique em link de navegação.
+ * @returns {JSX.Element} Conteúdo da sidebar renderizado.
  */
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import {
   LayoutDashboard, Users, Monitor, Package, FileText, LogOut, Shield
 } from "lucide-react";
 import { useAuth } from "../auth/AuthContext";
+import { cn } from "@/lib/utils";
 
+/** Itens de navegação principal do sistema. */
 const navItems = [
   { path: "/dashboard", label: "Dashboard", icon: LayoutDashboard },
   { path: "/collaborators", label: "Colaboradores", icon: Users },
@@ -18,7 +25,11 @@ const navItems = [
   { path: "/reports", label: "Relatórios", icon: FileText },
 ];
 
-const AppSidebar = () => {
+interface AppSidebarProps {
+  onNavigate?: () => void;
+}
+
+const AppSidebar = ({ onNavigate }: AppSidebarProps = {}) => {
   const location = useLocation();
   const navigate = useNavigate();
   const { user, logout } = useAuth();
@@ -27,10 +38,11 @@ const AppSidebar = () => {
   const handleLogout = () => {
     logout();
     navigate("/login");
+    onNavigate?.();
   };
 
   return (
-    <aside className="w-64 min-h-screen bg-sidebar flex flex-col">
+    <div className="flex flex-col h-full bg-sidebar">
       <div className="px-6 py-5 border-b border-sidebar-border">
         <div className="flex items-center gap-3">
           <div className="w-9 h-9 rounded-lg bg-sidebar-accent flex items-center justify-center">
@@ -38,7 +50,7 @@ const AppSidebar = () => {
           </div>
           <div>
             <h1 className="text-sm font-bold text-sidebar-foreground tracking-wide">JRC BRASIL</h1>
-            <p className="text-[10px] text-sidebar-foreground/50 tracking-widest uppercase">Compliance TI</p>
+            <p className="text-xs text-sidebar-foreground/50 tracking-widest uppercase">Compliance TI</p>
           </div>
         </div>
       </div>
@@ -50,11 +62,13 @@ const AppSidebar = () => {
             <Link
               key={path}
               to={path}
-              className={`flex items-center gap-3 px-3 py-2.5 rounded-md text-sm font-medium transition-colors ${
+              onClick={onNavigate}
+              className={cn(
+                "flex items-center gap-3 px-3 py-2.5 rounded-md text-sm font-medium transition-colors",
                 isActive
                   ? "bg-sidebar-active text-sidebar-foreground"
                   : "text-sidebar-foreground/60 hover:bg-sidebar-hover hover:text-sidebar-foreground"
-              }`}
+              )}
             >
               <Icon className="w-4 h-4" />
               {label}
@@ -75,7 +89,7 @@ const AppSidebar = () => {
           Sair
         </button>
       </div>
-    </aside>
+    </div>
   );
 };
 

@@ -7,13 +7,11 @@
 import { useState } from "react";
 import AppLayout from "@/components/AppLayout";
 import PageHeader from "@/components/PageHeader";
+import { TableSkeleton, TableError, TableEmpty, TablePagination } from "@/components/TableStates";
 import { useSoftware } from "@/hooks/useSoftware";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
-import { Button } from "@/components/ui/button";
-import { Skeleton } from "@/components/ui/skeleton";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
-import { AlertCircle } from "lucide-react";
 
 const PAGE_SIZE = 20;
 
@@ -33,30 +31,17 @@ const SoftwarePage = () => {
       <PageHeader title="Software" subtitle="Controle de licenças de software" />
 
       <div className="bg-card rounded-xl border border-border overflow-hidden">
-        {isLoading && (
-          <div className="p-6 space-y-3">
-            {Array.from({ length: 5 }).map((_, i) => (
-              <Skeleton key={i} className="h-10 w-full" />
-            ))}
-          </div>
-        )}
+        {isLoading && <TableSkeleton />}
 
         {isError && (
-          <div className="p-8 text-center">
-            <AlertCircle className="w-8 h-8 text-destructive mx-auto mb-2" />
-            <p className="text-sm text-muted-foreground mb-3">Erro ao carregar software.</p>
-            <Button variant="outline" size="sm" onClick={() => refetch()}>Tentar novamente</Button>
-          </div>
+          <TableError message="Erro ao carregar software." onRetry={() => refetch()} />
         )}
 
-        {data && data.results.length === 0 && (
-          <div className="p-8 text-center">
-            <p className="text-sm text-muted-foreground">Nenhum registro encontrado.</p>
-          </div>
-        )}
+        {data && data.results.length === 0 && <TableEmpty />}
 
         {data && data.results.length > 0 && (
           <>
+            <div className="overflow-x-auto">
             <Table>
               <TableHeader>
                 <TableRow>
@@ -94,25 +79,10 @@ const SoftwarePage = () => {
                 })}
               </TableBody>
             </Table>
+            </div>
 
             {totalPages > 1 && (
-              <nav aria-label="Paginação" className="flex justify-center gap-1 p-4 border-t border-border">
-                {Array.from({ length: totalPages }).map((_, i) => (
-                  <button
-                    key={i}
-                    className={`px-3 py-1 text-sm border rounded transition-colors ${
-                      page === i + 1
-                        ? "bg-primary text-primary-foreground border-primary"
-                        : "hover:bg-muted"
-                    }`}
-                    onClick={() => setPage(i + 1)}
-                    aria-label={`Ir para página ${i + 1}`}
-                    aria-current={page === i + 1 ? "page" : undefined}
-                  >
-                    {i + 1}
-                  </button>
-                ))}
-              </nav>
+              <TablePagination page={page} totalPages={totalPages} onPageChange={setPage} />
             )}
           </>
         )}

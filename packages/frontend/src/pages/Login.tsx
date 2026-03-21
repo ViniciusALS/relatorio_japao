@@ -51,7 +51,7 @@ const Login = () => {
           </p>
         </div>
 
-        <div className="bg-card rounded-xl shadow-2xl p-8">
+        <div className="bg-card rounded-xl border border-border p-8">
           <h2 className="text-lg font-semibold text-card-foreground mb-6">Entrar no sistema</h2>
           <form onSubmit={handleSubmit} className="space-y-5">
             <div className="space-y-2">

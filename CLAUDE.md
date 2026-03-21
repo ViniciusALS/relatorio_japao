@@ -416,7 +416,8 @@ Request → urls.py (Route) → Controller → Service → Repository → Model/
 - Handlers em `packages/frontend/src/mocks/handlers/`.
 - Bootstrap condicional em `main.tsx` — zero impacto no build de produção.
 
-Para detalhes completos, consultar [docs/FRONTEND.md](docs/FRONTEND.md).
+Para detalhes completos de implementacao, consultar [docs/FRONTEND.md](docs/FRONTEND.md).
+Para design tokens, espacamento, tipografia e padroes visuais de componentes, consultar [.interface-design/system.md](.interface-design/system.md).
 
 ## Estrutura do Monorepo
 

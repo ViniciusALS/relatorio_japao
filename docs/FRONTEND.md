@@ -1,6 +1,7 @@
 # Frontend - React SPA
 
 > Referencia profunda para trabalho no frontend. Para visao geral, ver [../CLAUDE.md](../CLAUDE.md).
+> Para design tokens, spacing, tipografia e padroes visuais, ver [../.interface-design/system.md](../.interface-design/system.md).
 
 ## Stack
 
