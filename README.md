@@ -32,7 +32,7 @@ relatorio_japao/
 ├── ANALISE.md                 # Analise das versões originais
 ├── PLANO_IMPLEMENTACAO.md     # Plano de 7 fases
 ├── docker-compose.yml
-├── .env
+├── .env.example              # Variáveis de ambiente (copiar para .env)
 ├── docs/
 │   ├── BACKEND.md             # Referência Django/DRF
 │   ├── FRONTEND.md            # Referência React SPA
@@ -56,26 +56,43 @@ relatorio_japao/
 
 ## Como Executar
 
-### Com Docker (recomendado)
+### 1. Configurar variáveis de ambiente
+
+Copie os arquivos de exemplo e ajuste se necessário:
+
+```bash
+cp .env.example .env
+cp packages/frontend/.env.example packages/frontend/.env
+```
+
+> **Importante:** Nunca commite o `.env` real. Os `.example` já contêm valores padrão para desenvolvimento local.
+
+### 2a. Com Docker (recomendado)
 
 ```bash
 docker-compose up --build
 ```
 
-Acesse: `http://localhost:3000`
+| Serviço | URL |
+|---------|-----|
+| Frontend | `http://localhost:8080` |
+| Backend API | `http://localhost:8000/api/` |
+| PostgreSQL | `localhost:5432` |
 
-### Sem Docker
+### 2b. Sem Docker
 
 **Backend:**
 
 ```bash
 cd backend
-python -m venv venv && source venv/bin/activate
+python -m venv venv && source venv/bin/activate  # Linux/Mac
 pip install -r requirements.txt
 python manage.py migrate
 python manage.py createsuperuser
 python manage.py runserver
 ```
+
+> Sem Docker, ajuste `DB_HOST=localhost` no `.env` (em vez de `db`).
 
 **Frontend:**
 
@@ -84,6 +101,8 @@ cd packages/frontend
 npm install
 npm run dev
 ```
+
+Acesse: `http://localhost:8080`
 
 ## Domínio de Negócio
 
