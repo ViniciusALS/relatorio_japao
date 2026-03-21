@@ -8,7 +8,7 @@
 |-----------|--------|-------|-----------|
 | `db` | postgres:13.5 | 5432 | Banco de dados PostgreSQL |
 | `backend` | Python 3.11 + Django | 8000 | API REST |
-| `frontend` | Node 18 (dev) / nginx (prod) | 3000 (dev) / 80 (prod) | React SPA |
+| `frontend` | Node 18 (dev) / nginx (prod) | 8080 (dev) / 80 (prod) | React SPA |
 
 ## Variaveis de Ambiente (.env)
 
@@ -33,14 +33,14 @@ POSTGRES_USER=admin
 POSTGRES_PASSWORD=admin
 
 # CORS
-CORS_ALLOWED_ORIGINS=http://localhost:3000
+CORS_ALLOWED_ORIGINS=http://localhost:8080
 
 # JWT
 ACCESS_TOKEN_LIFETIME_MINUTES=30
 REFRESH_TOKEN_LIFETIME_DAYS=1
 
 # Frontend
-REACT_APP_API_URL=http://localhost:8000/api
+VITE_API_URL=http://localhost:8000/api
 ```
 
 > **IMPORTANTE:** Nunca commite o `.env` real. Mantenha um `.env.example` no repositorio.
@@ -82,16 +82,16 @@ services:
 
   frontend:
     build:
-      context: ./frontend
+      context: ./packages/frontend
       dockerfile: Dockerfile
     ports:
-      - "3000:3000"
+      - "8080:8080"
     volumes:
-      - ./frontend/src:/app/src
+      - ./packages/frontend/src:/app/src
     depends_on:
       - backend
     environment:
-      - REACT_APP_API_URL=http://localhost:8000/api
+      - VITE_API_URL=http://localhost:8000/api
 
 volumes:
   postgres_data:
@@ -128,7 +128,7 @@ services:
 
   frontend:
     build:
-      context: ./frontend
+      context: ./packages/frontend
       dockerfile: Dockerfile.prod
     ports:
       - "80:80"
@@ -163,7 +163,7 @@ EXPOSE 8000
 CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
 ```
 
-### Frontend - Dev (frontend/Dockerfile)
+### Frontend - Dev (packages/frontend/Dockerfile)
 
 ```dockerfile
 FROM node:18-alpine
@@ -175,12 +175,12 @@ RUN npm ci
 
 COPY . .
 
-EXPOSE 3000
+EXPOSE 8080
 
-CMD ["npm", "start"]
+CMD ["npm", "run", "dev"]
 ```
 
-### Frontend - Prod (frontend/Dockerfile.prod)
+### Frontend - Prod (packages/frontend/Dockerfile.prod)
 
 ```dockerfile
 # Build stage
@@ -197,7 +197,7 @@ RUN npm run build
 # Production stage
 FROM nginx:alpine
 
-COPY --from=build /app/build /usr/share/nginx/html
+COPY --from=build /app/dist /usr/share/nginx/html
 COPY nginx.conf /etc/nginx/conf.d/default.conf
 
 EXPOSE 80
@@ -205,7 +205,7 @@ EXPOSE 80
 CMD ["nginx", "-g", "daemon off;"]
 ```
 
-## nginx.conf (frontend/nginx.conf)
+## nginx.conf (packages/frontend/nginx.conf)
 
 ```nginx
 server {
@@ -321,7 +321,7 @@ docker-compose exec backend python manage.py flush --noinput
 **Checklist:**
 1. `django-cors-headers` esta em `INSTALLED_APPS`?
 2. `CorsMiddleware` esta no `MIDDLEWARE` **antes** de `CommonMiddleware`?
-3. `CORS_ALLOWED_ORIGINS` inclui `http://localhost:3000`?
+3. `CORS_ALLOWED_ORIGINS` inclui `http://localhost:8080`?
 4. Frontend esta usando a URL correta da API (sem barra dupla `//api`)?
 
 ### Migracoes
@@ -357,7 +357,7 @@ docker-compose exec backend python manage.py migrate
 **Checklist (producao com nginx):**
 1. `nginx.conf` tem `try_files $uri $uri/ /index.html`?
 2. Build do React foi copiado para `/usr/share/nginx/html`?
-3. `REACT_APP_API_URL` foi definido antes do `npm run build`?
+3. `VITE_API_URL` foi definido antes do `npm run build`?
 
 ### Porta em uso
 
