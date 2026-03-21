@@ -60,21 +60,34 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   /**
    * Autentica usuário com credenciais e armazena tokens JWT.
    *
+   * Tokens só são persistidos em localStorage após confirmação
+   * do perfil via /auth/me/. Se o fetch do perfil falhar, os
+   * tokens são descartados para evitar estado half-authenticated.
+   *
    * @param username - Nome de usuário.
    * @param password - Senha do usuário.
-   * @throws Error se credenciais forem inválidas.
+   * @throws Error se credenciais forem inválidas ou perfil indisponível.
    */
   const login = async (username: string, password: string) => {
     const res = await api.post('/auth/login/', { username, password })
-    localStorage.setItem('access_token', res.data.access)
-    localStorage.setItem('refresh_token', res.data.refresh)
-    const userRes = await api.get('/auth/me/')
-    setUser({
-      id: userRes.data.id,
-      username: userRes.data.username,
-      email: userRes.data.email,
-      isStaff: userRes.data.is_staff,
-    })
+    const { access, refresh } = res.data
+
+    localStorage.setItem('access_token', access)
+    localStorage.setItem('refresh_token', refresh)
+
+    try {
+      const userRes = await api.get('/auth/me/')
+      setUser({
+        id: userRes.data.id,
+        username: userRes.data.username,
+        email: userRes.data.email,
+        isStaff: userRes.data.is_staff,
+      })
+    } catch (err) {
+      localStorage.removeItem('access_token')
+      localStorage.removeItem('refresh_token')
+      throw err
+    }
   }
 
   /** Encerra sessão, invalida refresh token e limpa localStorage. */

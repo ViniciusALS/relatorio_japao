@@ -8,7 +8,7 @@ O **frontend React** está totalmente implementado e funcional usando **MSW (Moc
 
 O **backend Django** ainda **não foi iniciado** — não há modelos, migrations, controllers, services ou repositories implementados.
 
-**Resumo:** é possível navegar por toda a aplicação, criar/editar/excluir registros e gerar relatórios, mas tudo opera sobre dados simulados em memória (MSW). Nenhum dado persiste entre recarregamentos da página.
+**Resumo:** é possível navegar por toda a aplicação e visualizar listagens com dados simulados em memória (MSW). Formulários de criação, edição e exclusão ainda não foram implementados. Nenhum dado persiste entre recarregamentos da página.
 
 ## Como Usar o que Temos
 
@@ -34,11 +34,11 @@ Acesse: `http://localhost:8080`
 | Página | Rota | O que faz |
 |--------|------|-----------|
 | Login | `/login` | Autenticação simulada via MSW; redireciona ao Dashboard |
-| Dashboard | `/` | Exibe cards com totais (colaboradores, máquinas, software, relatórios) |
-| Colaboradores | `/collaborators` | CRUD completo com listagem, criação, edição e exclusão |
-| Máquinas | `/machines` | CRUD completo com listagem, criação, edição e exclusão |
-| Software | `/software` | CRUD completo com listagem, criação, edição e exclusão |
-| Relatórios | `/reports` | Lista os 19 relatórios com status e ações de visualização/exportação |
+| Dashboard | `/dashboard` | Exibe KPIs (colaboradores, máquinas, software, relatórios pendentes) e alertas de segurança |
+| Colaboradores | `/collaborators` | Listagem paginada com status e permissões (somente leitura) |
+| Máquinas | `/machines` | Listagem paginada com tipo, criptografia e antivírus (somente leitura) |
+| Software | `/software` | Listagem paginada com tipo de licença e uso (somente leitura) |
+| Relatórios | `/reports` | Lista os 19 relatórios agrupados por categoria, com geração e download PDF/Excel |
 
 ## Fases do Projeto
 
@@ -47,9 +47,9 @@ Acesse: `http://localhost:8080`
 | 1 | Setup do Projeto | Parcial | Frontend configurado (Vite + React + Tailwind + shadcn/ui). Backend não iniciado (sem Django project/apps). |
 | 2 | Modelos Django | Não iniciada | 14 modelos + BaseModel com soft delete ainda não implementados. |
 | 3 | Autenticação JWT | Parcial | Frontend implementado (AuthContext, ProtectedRoute, interceptors Axios). Backend não iniciado (sem simplejwt). |
-| 4 | CRUD API REST | Parcial | Frontend implementado (páginas + hooks React Query + MSW handlers). Backend não iniciado (sem controllers/services/repositories). |
+| 4 | CRUD API REST | Parcial | Frontend implementado com listagem paginada + MSW handlers (somente leitura — faltam formulários de criação, edição e exclusão). Backend não iniciado (sem controllers/services/repositories). |
 | 5 | 19 Relatórios | Parcial | Frontend implementado (página de listagem + visualização). Backend não iniciado (sem exporters PDF/XLSX). |
-| 6 | Integração Frontend | ~90% concluída | Todas as páginas implementadas com MSW. Falta conectar à API real quando o backend existir. |
+| 6 | Integração Frontend | ~60% concluída | Listagem e visualização implementadas com MSW. Faltam formulários de criação/edição/exclusão e conexão à API real. |
 | 7 | Finalização | Não iniciada | Docker Compose, testes E2E, deploy, documentação final. |
 
 ## Próximos Passos

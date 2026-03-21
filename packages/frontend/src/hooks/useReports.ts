@@ -36,7 +36,7 @@ function useReportsList() {
   })
 }
 
-/** Mutation para gerar um relatório, invalidando a lista após sucesso. */
+/** Mutation para gerar um relatório, invalidando lista e stats do dashboard após sucesso. */
 function useGenerateReport() {
   const queryClient = useQueryClient()
 
@@ -45,6 +45,7 @@ function useGenerateReport() {
       api.post(`/reports/${reportNumber}/generate/`).then(r => r.data),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['reports'] })
+      queryClient.invalidateQueries({ queryKey: ['dashboard-stats'] })
     },
   })
 }
