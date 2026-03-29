@@ -73,11 +73,30 @@ cp packages/frontend/.env.example packages/frontend/.env
 docker-compose up --build
 ```
 
-| Serviço | URL |
-|---------|-----|
-| Frontend | `http://localhost:8080` |
-| Backend API | `http://localhost:8000/api/` |
-| PostgreSQL | `localhost:5432` |
+O entrypoint do backend executa automaticamente:
+1. Aguarda o PostgreSQL ficar pronto
+2. Aplica migrações (`migrate`)
+3. Carrega dados de teste (53 objetos: colaboradores, máquinas, software, 19 relatórios)
+4. Cria superusuário de desenvolvimento (se não existir)
+
+**Credenciais de desenvolvimento:**
+
+| Credencial | Valor |
+|------------|-------|
+| Username | `admin` |
+| Password | `admin123` |
+| E-mail | `admin@jrc.com` |
+
+> **Nota:** Essas credenciais são apenas para desenvolvimento local. Em produção (`DEBUG=False`), `SECRET_KEY` e `DB_PASSWORD` são obrigatórios via `.env` — o servidor não inicia sem eles.
+
+**Acessos:**
+
+| Serviço | URL | Login |
+|---------|-----|-------|
+| Frontend | `http://localhost:8080` | admin / admin123 |
+| Backend API | `http://localhost:8000/api/` | Bearer token via login |
+| Django Admin | `http://localhost:8000/admin/` | admin / admin123 |
+| PostgreSQL | `localhost:5432` | DB: relatoriojapao |
 
 ### 2b. Sem Docker
 
@@ -88,7 +107,8 @@ cd backend
 python -m venv venv && source venv/bin/activate  # Linux/Mac
 pip install -r requirements.txt
 python manage.py migrate
-python manage.py createsuperuser
+python manage.py loaddata fixtures/sample_data.json
+python manage.py createsuperuser  # ou: python manage.py shell -c "from django.contrib.auth.models import User; User.objects.create_superuser('admin', 'admin@jrc.com', 'admin123')"
 python manage.py runserver
 ```
 
@@ -102,7 +122,17 @@ npm install
 npm run dev
 ```
 
-Acesse: `http://localhost:8080`
+Acesse: `http://localhost:8080` — Login: admin / admin123
+
+### Conectar frontend ao backend real
+
+Por padrão o frontend usa MSW (Mock Service Worker) para simular a API. Para usar o backend real:
+
+```bash
+# No arquivo packages/frontend/.env, altere:
+VITE_API_URL=http://localhost:8000/api
+VITE_ENABLE_MSW=false
+```
 
 ## Domínio de Negócio
 
