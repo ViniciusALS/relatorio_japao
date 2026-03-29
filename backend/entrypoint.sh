@@ -13,5 +13,8 @@ echo "PostgreSQL disponivel."
 echo "Aplicando migracoes..."
 python manage.py migrate --noinput
 
+echo "Carregando dados iniciais (se tabelas estiverem vazias)..."
+python manage.py loaddata fixtures/sample_data.json --ignorenonexistent 2>/dev/null || echo "Fixtures ja carregadas ou nao encontradas."
+
 echo "Iniciando servidor..."
 exec python manage.py runserver 0.0.0.0:8000
