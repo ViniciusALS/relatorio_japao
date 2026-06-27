@@ -6,6 +6,12 @@ name: CD Staging
 on:
   push:
     branches: [staging]
+    # Mudancas so de documentacao nao redeployam (o deploy e idempotente, mas
+    # evita rodar build+deploy a toa). Commits que mexem em codigo/infra rodam
+    # normalmente (paths-ignore so pula quando TODOS os arquivos batem).
+    paths-ignore:
+      - '**.md'
+      - 'docs/**'
 
 # Deploys serializados (nunca cancela um em andamento — cicd licao 6).
 concurrency:
